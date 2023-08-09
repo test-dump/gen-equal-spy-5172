@@ -1,0 +1,21 @@
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace HelloWorld.Tests
+{
+    [TestClass]
+    public class HelloWorldTests
+    {
+        [TestMethod]
+        public void HelloWorld_PrintsCorrectly()
+        {
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            helloWorldApp.Program.Main(null);
+
+            var output = writer.GetStringBuilder().ToString().Trim();
+            Assert.AreEqual("Hello, World!", output);
+        }
+    }
+}
