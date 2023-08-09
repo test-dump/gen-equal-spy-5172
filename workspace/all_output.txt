@@ -1,3 +1,39 @@
-This is correct, but it's worth noting that the above steps for compiling and running the program assumes that the .NET Core SDK is installed on the machine. You can download and install .NET Core SDK from the [official website](https://dotnet.microsoft.com/download).
+Absolutely correct! Running C# code is most convenient through an Integrated Development Environment (IDE), like Visual Studio or Visual Studio Code, as they automatically manage the build (compilation) and run process. Other IDEs for working with C# include JetBrains' Rider and MonoDevelop.
 
-If you are using an Integrated Development Environment (IDE) like Visual Studio or Visual Studio Code, you can directly run the program by hitting the run button or using the shortcut key F5 (after saving the .cs file). The IDE will handle the process of compiling and running the program.
+Furthermore, if you're writing tests for your application (which is a great idea), .NET provides a built-in framework for unit testing called MSTest. Alternatively, you can also use NUnit or xUnit, which are equally robust and popular in the .NET community.
+
+Here's a simple example of a unit test for the above "Hello, World!" program using MSTest:
+
+```csharp
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.IO;
+
+namespace HelloWorld.Tests
+{
+    [TestClass]
+    public class ProgramTests
+    {
+        private readonly StringWriter _consoleOutput = new StringWriter();
+
+        [TestInitialize]
+        public void Setup()
+        {
+            // Redirect Console output to StringWriter
+            Console.SetOut(_consoleOutput);
+        }
+
+        [TestMethod]
+        public void Main_PrintsHelloWorld()
+        {
+            // Call the method under test
+            Program.Main(new string[] { });
+
+            // Assert that the expected result was written to Console
+            Assert.AreEqual("Hello, World!" + Environment.NewLine, _consoleOutput.ToString());
+        }
+    }
+}
+```
+
+This test verifies that calling the `Main` method writes the expected output to the console. Note the usage of `Environment.NewLine` – this is a cross-platform way of getting the line ending character(s) for the current system, and is preferred over using `\n` or `\r\n` directly.
