@@ -1,0 +1,31 @@
+To create a simple "Hello, World!" console application in C#, you need to create a new file with a .cs extension (for example, HelloWorld.cs), then add the following code:
+
+```csharp
+using System;
+
+class Program {
+    static void Main(string[] args) {
+        Console.WriteLine("Hello, World!");
+    }
+}
+```
+
+Here's a breakdown of what the code does:
+
+- `using System;` - this line includes the System namespace, which contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
+
+- `class Program { ... }` - C# is an Object Oriented language, so the main code needs to be inside a class. In this case, we've made a class called `Program`.
+
+- `static void Main(string[] args) { ... }` - this is the Main method, the entry point of the application. When the application starts, it calls this method. 
+
+- `Console.WriteLine("Hello, World!");` - this line of code prints the text "Hello, World!" to the console.
+
+To compile and run this program, do the following:
+
+1. Open a terminal/command prompt.
+
+2. Navigate (`cd`) to the directory where you saved HelloWorld.cs.
+
+3. Run `csc HelloWorld.cs`. This will create a HelloWorld.exe file in the same directory.
+
+4. Run `HelloWorld.exe` to execute your program. It will print `Hello, World!` to the console.
