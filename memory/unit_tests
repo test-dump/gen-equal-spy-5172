@@ -1,0 +1,3 @@
+This is correct, but it's worth noting that the above steps for compiling and running the program assumes that the .NET Core SDK is installed on the machine. You can download and install .NET Core SDK from the [official website](https://dotnet.microsoft.com/download).
+
+If you are using an Integrated Development Environment (IDE) like Visual Studio or Visual Studio Code, you can directly run the program by hitting the run button or using the shortcut key F5 (after saving the .cs file). The IDE will handle the process of compiling and running the program.
