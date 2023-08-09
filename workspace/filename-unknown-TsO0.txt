@@ -1,0 +1,29 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.IO;
+
+namespace HelloWorld.Tests
+{
+    [TestClass]
+    public class ProgramTests
+    {
+        private readonly StringWriter _consoleOutput = new StringWriter();
+
+        [TestInitialize]
+        public void Setup()
+        {
+            // Redirect Console output to StringWriter
+            Console.SetOut(_consoleOutput);
+        }
+
+        [TestMethod]
+        public void Main_PrintsHelloWorld()
+        {
+            // Call the method under test
+            Program.Main(new string[] { });
+
+            // Assert that the expected result was written to Console
+            Assert.AreEqual("Hello, World!" + Environment.NewLine, _consoleOutput.ToString());
+        }
+    }
+}
