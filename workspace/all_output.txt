@@ -1,39 +1,78 @@
-Absolutely correct! Running C# code is most convenient through an Integrated Development Environment (IDE), like Visual Studio or Visual Studio Code, as they automatically manage the build (compilation) and run process. Other IDEs for working with C# include JetBrains' Rider and MonoDevelop.
+You're correct, I apologize for the confusion. 
 
-Furthermore, if you're writing tests for your application (which is a great idea), .NET provides a built-in framework for unit testing called MSTest. Alternatively, you can also use NUnit or xUnit, which are equally robust and popular in the .NET community.
+Let's go step-by-step to create the "Hello, World!" application with C# by using the console app (.NET Core):
 
-Here's a simple example of a unit test for the above "Hello, World!" program using MSTest:
-
+1. First, install the .NET Core SDK from the .NET download page.
+2. Create an empty project. Here's how do you make the empty project in C#:
 ```csharp
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+dotnet new console -o helloWorldApp
+```
+3. After running the above command in your terminal, a new directory named helloWorldApp is created and inside of that a new console application was created.
+4. Navigate to that new created folder with the following command:
+```csharp
+cd helloWorldApp
+```
+5. Inside the helloWorldApp directory, you will find a Program.cs file. In this you will write the actual code. Automatically generated code:
+```csharp
 using System;
-using System.IO;
 
-namespace HelloWorld.Tests
+namespace helloWorldApp
 {
-    [TestClass]
-    public class ProgramTests
+    class Program
     {
-        private readonly StringWriter _consoleOutput = new StringWriter();
-
-        [TestInitialize]
-        public void Setup()
+        static void Main(string[] args)
         {
-            // Redirect Console output to StringWriter
-            Console.SetOut(_consoleOutput);
-        }
-
-        [TestMethod]
-        public void Main_PrintsHelloWorld()
-        {
-            // Call the method under test
-            Program.Main(new string[] { });
-
-            // Assert that the expected result was written to Console
-            Assert.AreEqual("Hello, World!" + Environment.NewLine, _consoleOutput.ToString());
+            Console.WriteLine("Hello World!");
         }
     }
 }
 ```
+6. Then run this command to execute the application:
+```csharp
+dotnet run
+```
+You will see that the console shows "Hello World!". 
 
-This test verifies that calling the `Main` method writes the expected output to the console. Note the usage of `Environment.NewLine` – this is a cross-platform way of getting the line ending character(s) for the current system, and is preferred over using `\n` or `\r\n` directly.
+If you want to create a new test project for this main project, you can use below commands:
+1. Create new mstest project:
+```csharp
+dotnet new mstest -o HelloWorld.Tests
+```
+2. Navigate to the new test project:
+```csharp
+cd HelloWorld.Tests
+```
+3. Add a reference to the main project:
+```csharp
+dotnet add reference ../helloWorldApp/helloWorldApp.csproj
+```
+4. Inside the unit test project, create a new test:
+```csharp
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace HelloWorld.Tests
+{
+    [TestClass]
+    public class HelloWorldTests
+    {
+        [TestMethod]
+        public void HelloWorld_PrintsCorrectly()
+        {
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            helloWorldApp.Program.Main(null);
+
+            var output = writer.GetStringBuilder().ToString().Trim();
+            Assert.AreEqual("Hello, World!", output);
+        }
+    }
+}
+```
+In the above test class we are testing that the Main function in the HelloWorld program prints "Hello, World!" to the console.
+
+To run the tests:
+```csharp
+dotnet test
+```
